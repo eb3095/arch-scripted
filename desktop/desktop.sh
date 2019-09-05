@@ -63,7 +63,11 @@ chmod +x /mnt/root/desktop-chroot-installer.sh
 
 # Download package list
 wget https://raw.githubusercontent.com/eb3095/arch-scripted/master/desktop/packages.txt
+wget https://raw.githubusercontent.com/eb3095/arch-scripted/master/desktop/dev-packages.txt
+wget https://raw.githubusercontent.com/eb3095/arch-scripted/master/desktop/virt-packages.txt
 mv packages.txt /mnt/root/packages.txt
+mv dev-packages.txt /mnt/root/dev-packages.txt
+mv virt-packages.txt /mnt/root/virt-packages.txt
 
 # Create bootstrap
 echo '#!/bin/bash' >> /mnt/root/bootstrap.sh
