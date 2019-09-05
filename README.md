@@ -5,7 +5,7 @@ A collection of scripts to install Arch automagically. To install use the follow
 
 ### Desktop
 ```
-wget https://github.com/eb3095/arch-scripted/blob/master/desktop/desktop.sh
+wget https://raw.githubusercontent.com/eb3095/arch-scripted/master/desktop/desktop.sh
 chmod +x desktop.sh
 ./desktop.sh
 ```
