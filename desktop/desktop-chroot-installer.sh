@@ -108,6 +108,7 @@ while true; do
         * ) echo "Please answer yes or no.";;
     esac
 done
+
 PACK=`cat ${PACKAGES}`
 runuser -l installer -c "trizen -Sy --noconfirm ${PACK}"
 
