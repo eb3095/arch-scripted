@@ -57,17 +57,13 @@ pacstrap /mnt base
 genfstab -U /mnt >> /mnt/etc/fstab
 
 # Download script
-wget https://raw.githubusercontent.com/eb3095/arch-scripted/master/desktop/desktop-chroot-installer.sh
-mv desktop-chroot-installer.sh /mnt/root/desktop-chroot-installer.sh
+wget https://raw.githubusercontent.com/eb3095/arch-scripted/master/desktop/desktop-chroot-installer.sh -o /mnt/root/desktop-chroot-installer.sh
 chmod +x /mnt/root/desktop-chroot-installer.sh
 
 # Download package list
-wget https://raw.githubusercontent.com/eb3095/arch-scripted/master/desktop/packages.txt
-wget https://raw.githubusercontent.com/eb3095/arch-scripted/master/desktop/dev-packages.txt
-wget https://raw.githubusercontent.com/eb3095/arch-scripted/master/desktop/virt-packages.txt
-mv packages.txt /mnt/root/packages.txt
-mv dev-packages.txt /mnt/root/dev-packages.txt
-mv virt-packages.txt /mnt/root/virt-packages.txt
+wget https://raw.githubusercontent.com/eb3095/arch-scripted/master/desktop/packages.txt -o /mnt/root/packages.txt
+wget https://raw.githubusercontent.com/eb3095/arch-scripted/master/desktop/dev-packages.txt -o /mnt/root/dev-packages.txt
+wget https://raw.githubusercontent.com/eb3095/arch-scripted/master/desktop/virt-packages.txt -o /mnt/root/virt-packages.txt
 
 # Create bootstrap
 echo '#!/bin/bash' >> /mnt/root/bootstrap.sh
