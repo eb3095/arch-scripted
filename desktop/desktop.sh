@@ -58,12 +58,16 @@ genfstab -U /mnt >> /mnt/etc/fstab
 
 # Download script
 wget https://raw.githubusercontent.com/eb3095/arch-scripted/master/desktop/desktop-chroot-installer.sh
-mv desktop-chroot-installer.sh /mnt/root/fakintosh-chroot-installer.sh
+mv desktop-chroot-installer.sh /mnt/root/desktop-chroot-installer.sh
 chmod +x /mnt/root/desktop-chroot-installer.sh
+
+# Download package list
+wget https://raw.githubusercontent.com/eb3095/arch-scripted/master/desktop/packages.txt
+mv packages.txt /mnt/root/packages.txt
 
 # Create bootstrap
 echo '#!/bin/bash' >> /mnt/root/bootstrap.sh
-echo "/root/fakintosh-chroot-installer.sh $drive" >> /mnt/root/bootstrap.sh
+echo "/root/desktop-chroot-installer.sh $drive" >> /mnt/root/bootstrap.sh
 chmod +x /mnt/root/bootstrap.sh
 
 # Chroot in and run second part
