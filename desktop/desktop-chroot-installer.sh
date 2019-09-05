@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Fakintosh Installaltion Script
+# Desktop Installaltion Script
 # Version: 1.0
 # Author: Eric Benner
 
@@ -35,7 +35,7 @@ echo iMac > /etc/hostname
 # Create Hosts file
 echo "127.0.0.1      localhost" >> /etc/hosts
 echo "::1            localhost" >> /etc/hosts
-echo "127.0.1.1      iMac.localdomain iMac" >> /etc/hosts
+echo "127.0.1.1      arch.localdomain arch" >> /etc/hosts
 
 # Make initramfs
 mkinitcpio -p linux
@@ -60,17 +60,10 @@ read -s userpw
 
 # Setup user
 mkdir /home/$user
-cp /etc/skel/.zshrc /home/$user/.zshrc
 useradd -d /home/$user $user
 echo $user:"$userpw" | chpasswd
-chsh -s $(which zsh) $user
 chown -R $user:$user /home/$user
 usermod -aG wheel $user
-
-# Setup root
-cp /etc/skel/.zshrc /root/.zshrc
-chsh -s $(which zsh) root
-
 
 # Setup SUDOERS
 sed -i -e 's/# %wheel ALL=(ALL) NOPASSWD\: ALL/%wheelnpw ALL=(ALL) NOPASSWD\: ALL/' /etc/sudoers
@@ -78,10 +71,10 @@ sed -i -e 's/# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/' /etc/sudoers
 groupadd wheelnpw
 
 # Setup installer
-useradd fakintosh
-usermod -aG wheelnpw fakintosh
-mkdir /home/fakintosh
-chown fakintosh:fakintosh /home/fakintosh
+useradd installer
+usermod -aG wheelnpw installer
+mkdir /home/installer
+chown installer:installer /home/installer
 
 # Install Grub
 if [ "$EFI" = true ] ; then
@@ -98,27 +91,13 @@ pushd /tmp
 git clone https://aur.archlinux.org/trizen.git
 popd
 chmod -R 777 /tmp/trizen
-runuser -l fakintosh -c 'cd /tmp/trizen;makepkg -si --noconfirm'
+runuser -l installer -c 'cd /tmp/trizen;makepkg -si --noconfirm'
 rm -rf /tmp/trizen
 
 # Install packages
-runuser -l fakintosh -c 'trizen -Sy --noconfirm weston plasma plasma-wayland-session'
-runuser -l fakintosh -c 'trizen -Sy --noconfirm kde-applications sddm opera pulseaudio'
-runuser -l fakintosh -c 'trizen -Sy --noconfirm tilix libreoffice-fresh kvantum-qt5'
-runuser -l fakintosh -c 'trizen -Sy --noconfirm networkmanager nm-connection-editor'
-runuser -l fakintosh -c 'trizen -Sy --noconfirm network-manager-applet networkmanager-openvpn'
-runuser -l fakintosh -c 'trizen -Sy --noconfirm remmina notepadqq atom nvidia nvidia-settings'
-runuser -l fakintosh -c 'trizen -Sy --noconfirm thunderbird ufw vlc openssh nfs-utils bind-tools'
-runuser -l fakintosh -c 'trizen -Sy --noconfirm noto-fonts noto-fonts-extra noto-fonts-cjk'
-runuser -l fakintosh -c 'trizen -Sy --noconfirm noto-fonts-emoji numlockx screen nmap jq'
-runuser -l fakintosh -c 'trizen -Sy --noconfirm gotop iotop ccze expect sshuttle inkscape'
-runuser -l fakintosh -c 'trizen -Sy --noconfirm gimp jdk11-openjdk php sshfs ttf-ms-fonts'
-runuser -l fakintosh -c 'trizen -Sy --noconfirm kdeconnect ttf-dejavu ttf-liberation'
-runuser -l fakintosh -c 'trizen -Sy --noconfirm remmina-plugin-rdesktop plasma5-applets-kde-arch-update-notifier-git'
-runuser -l fakintosh -c 'trizen -Sy --noconfirm octopi filezilla opera-ffmpeg-codecs'
-runuser -l fakintosh -c 'trizen -Sy --noconfirm ark cairo-dock cairo-dock-plug-ins-git wireless_tools'
-runuser -l fakintosh -c 'trizen -Sy --noconfirm gtk-engine-murrine gtk-engines'
-runuser -l fakintosh -c 'trizen --remove --noconfirm kwrite konsole konqueror kmail'
+PACKAGES=`cat /root/packages.txt`
+runuser -l installer -c "trizen -Sy --noconfirm ${PACKAGES}"
+runuser -l installer -c 'trizen --remove --noconfirm kwrite konsole konqueror kmail'
 
 # Fix permissions for iw
 setcap cap_net_raw,cap_net_admin=eip /usr/bin/iwconfig
@@ -137,9 +116,9 @@ ufw default deny incoming
 ufw allow 22
 
 # Dispose of installer user
-userdel fakintosh
-rm -rf /home/fakintosh
+userdel installer
+rm -rf /home/installer
 
 # Cleanup
-rm /root/fakintosh-chroot-installer.sh
+rm /root/desktop-chroot-installer.sh
 rm /root/bootstrap.sh
