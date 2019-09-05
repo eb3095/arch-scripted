@@ -19,6 +19,11 @@ echo "WARNING: THIS WILL WIPE THE DRIVE"
 echo "What drive do you want to install to? (/dev/sda) [ENTER]:"
 read drive
 
+if [ -z "$drive" ]
+then
+  drive="/dev/sda"
+fi
+
 # Partition drive
 if [ "$EFI" = true ] ; then
   parted --script $drive mklabel gpt
