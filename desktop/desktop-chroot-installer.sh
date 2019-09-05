@@ -101,10 +101,10 @@ VIRT=`cat /root/virt-packages.txt`
 
 # Install packages
 while true; do
-    read -p "Edit Dev Packages?" yn
+    read -p "Edit Base Packages?" yn
     case $yn in
-        [Yy]* ) nano "${DEV}"; break;;
-        [Nn]* ) exit;;
+        [Yy]* ) nano "${PACKAGES}"; break;;
+        [Nn]* ) break;;
         * ) echo "Please answer yes or no.";;
     esac
 done
@@ -116,7 +116,7 @@ while true; do
     read -p "Edit Dev Packages?" yn
     case $yn in
         [Yy]* ) nano "${DEV}"; break;;
-        [Nn]* ) exit;;
+        [Nn]* ) break;;
         * ) echo "Please answer yes or no.";;
     esac
 done
@@ -125,7 +125,7 @@ while true; do
     read -p "Install Dev Packages?" yn
     case $yn in
         [Yy]* ) runuser -l installer -c "trizen -Sy --noconfirm ${DEV}"; break;;
-        [Nn]* ) exit;;
+        [Nn]* ) break;;
         * ) echo "Please answer yes or no.";;
     esac
 done
@@ -134,7 +134,7 @@ while true; do
     read -p "Edit Virtualization Packages?" yn
     case $yn in
         [Yy]* ) nano "${VIRT}"; break;;
-        [Nn]* ) exit;;
+        [Nn]* ) break;;
         * ) echo "Please answer yes or no.";;
     esac
 done
@@ -143,7 +143,7 @@ while true; do
     read -p "Install Virtualization Packages?" yn
     case $yn in
         [Yy]* ) runuser -l installer -c "trizen -Sy --noconfirm ${VIRT}"; break;;
-        [Nn]* ) exit;;
+        [Nn]* ) break;;
         * ) echo "Please answer yes or no.";;
     esac
 done
