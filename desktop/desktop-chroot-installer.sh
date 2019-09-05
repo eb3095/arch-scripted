@@ -122,3 +122,4 @@ rm -rf /home/installer
 # Cleanup
 rm /root/desktop-chroot-installer.sh
 rm /root/bootstrap.sh
+rm /root/packages.txt
