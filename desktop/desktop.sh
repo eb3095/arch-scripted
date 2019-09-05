@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Fakintosh Installaltion Script
+# Desktop Installaltion Script
 # Version: 1.0
 # Author: Eric Benner
 
@@ -57,23 +57,14 @@ pacstrap /mnt base
 genfstab -U /mnt >> /mnt/etc/fstab
 
 # Download script
-wget https://raw.githubusercontent.com/eb3095/fakintosh/master/fakintosh-chroot-installer.sh
-mv fakintosh-chroot-installer.sh /mnt/root/fakintosh-chroot-installer.sh
-chmod +x /mnt/root/fakintosh-chroot-installer.sh
+wget https://raw.githubusercontent.com/eb3095/arch-scripted/master/desktop/desktop-chroot-installer.sh
+mv desktop-chroot-installer.sh /mnt/root/fakintosh-chroot-installer.sh
+chmod +x /mnt/root/desktop-chroot-installer.sh
 
 # Create bootstrap
 echo '#!/bin/bash' >> /mnt/root/bootstrap.sh
 echo "/root/fakintosh-chroot-installer.sh $drive" >> /mnt/root/bootstrap.sh
 chmod +x /mnt/root/bootstrap.sh
-
-# Modify and copy over .zshrc
-cp /etc/skel/.zshrc /mnt/etc/skel/.zshrc
-echo "PROMPT='%n@%ns-%m %~ %% '" >> /mnt/etc/skel/.zshrc
-echo "autoload -Uz compinit" >> /mnt/etc/skel/.zshrc
-echo "compinit" >> /mnt/etc/skel/.zshrc
-echo "zstyle ':completion:*' menu select" >> /mnt/etc/skel/.zshrc
-echo "setopt COMPLETE_ALIASES" >> /mnt/etc/skel/.zshrc
-echo "zstyle ':completion::complete:*' gain-privileges 1" >> /mnt/etc/skel/.zshrc
 
 # Chroot in and run second part
 arch-chroot /mnt /root/bootstrap.sh
