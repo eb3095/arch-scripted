@@ -95,9 +95,9 @@ runuser -l installer -c 'cd /tmp/trizen;makepkg -si --noconfirm'
 rm -rf /tmp/trizen
 
 # Setup Packages
-PACKAGES=`cat /root/packages.txt`
-DEV=`cat /root/dev-packages.txt`
-VIRT=`cat /root/virt-packages.txt`
+PACKAGES='/root/packages.txt'
+DEV='/root/dev-packages.txt'
+VIRT='/root/virt-packages.txt'
 
 # Install packages
 while true; do
@@ -108,8 +108,8 @@ while true; do
         * ) echo "Please answer yes or no.";;
     esac
 done
-
-runuser -l installer -c "trizen -Sy --noconfirm ${PACKAGES}"
+PACK=`cat ${PACKAGES}`
+runuser -l installer -c "trizen -Sy --noconfirm ${PACK}"
 
 # Install option packages
 while true; do
@@ -121,10 +121,11 @@ while true; do
     esac
 done
 
+DEVPACK=`cat ${DEV}`
 while true; do
     read -p "Install Dev Packages?" yn
     case $yn in
-        [Yy]* ) runuser -l installer -c "trizen -Sy --noconfirm ${DEV}"; break;;
+        [Yy]* ) runuser -l installer -c "trizen -Sy --noconfirm ${DEVPACK}"; break;;
         [Nn]* ) break;;
         * ) echo "Please answer yes or no.";;
     esac
@@ -139,10 +140,11 @@ while true; do
     esac
 done
 
+VIRTPACK=`cat ${VIRT}`
 while true; do
     read -p "Install Virtualization Packages?" yn
     case $yn in
-        [Yy]* ) runuser -l installer -c "trizen -Sy --noconfirm ${VIRT}"; break;;
+        [Yy]* ) runuser -l installer -c "trizen -Sy --noconfirm ${VIRTPACK}"; break;;
         [Nn]* ) break;;
         * ) echo "Please answer yes or no.";;
     esac
