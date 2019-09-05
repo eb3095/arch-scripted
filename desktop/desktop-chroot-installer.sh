@@ -30,7 +30,7 @@ locale-gen
 echo LANG=en_US.UTF-8 > /etc/locale.conf
 
 # Set hostname
-echo iMac > /etc/hostname
+echo arch > /etc/hostname
 
 # Create Hosts file
 echo "127.0.0.1      localhost" >> /etc/hosts
