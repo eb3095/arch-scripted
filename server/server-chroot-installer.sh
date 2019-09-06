@@ -100,7 +100,7 @@ VIRT='/root/virt-packages.txt'
 
 # Install packages
 while true; do
-    read -p "Edit Base Packages?" yn
+    read -p "Edit Base Packages? (y/n) " yn
     case $yn in
         [Yy]* ) nano "${PACKAGES}"; break;;
         [Nn]* ) break;;
@@ -113,7 +113,7 @@ runuser -l installer -c "trizen -Sy --noconfirm ${PACK}"
 
 # Install option packages
 while true; do
-    read -p "Edit Virtualization Packages?" yn
+    read -p "Edit Virtualization Packages? (y/n) " yn
     case $yn in
         [Yy]* ) nano "${VIRT}"; break;;
         [Nn]* ) break;;
@@ -123,7 +123,7 @@ done
 
 VIRTPACK=`cat ${VIRT}`
 while true; do
-    read -p "Install Virtualization Packages?" yn
+    read -p "Install Virtualization Packages? (y/n) " yn
     case $yn in
         [Yy]* ) runuser -l installer -c "trizen -Sy --noconfirm ${VIRTPACK}"; break;;
         [Nn]* ) break;;
