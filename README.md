@@ -16,3 +16,10 @@ wget https://raw.githubusercontent.com/eb3095/arch-scripted/master/server/server
 chmod +x server.sh
 ./server.sh
 ```
+
+### BlackArch
+```
+wget https://raw.githubusercontent.com/eb3095/arch-scripted/master/blackarch/blackarch.sh
+chmod +x blackarch.sh
+./blackarch.sh
+```
