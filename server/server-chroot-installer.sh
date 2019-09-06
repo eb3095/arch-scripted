@@ -139,7 +139,6 @@ setcap cap_net_raw,cap_net_admin=eip /usr/bin/iwconfig
 
 # Enable/Disable services
 systemctl enable ufw
-systemctl enable sddm
 systemctl enable sshd
 systemctl enable NetworkManager
 systemctl disable dhcpcd
