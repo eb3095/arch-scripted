@@ -9,3 +9,10 @@ wget https://raw.githubusercontent.com/eb3095/arch-scripted/master/desktop/deskt
 chmod +x desktop.sh
 ./desktop.sh
 ```
+
+### Server
+```
+wget https://raw.githubusercontent.com/eb3095/arch-scripted/master/server/server.sh
+chmod +x server.sh
+./server.sh
+```
