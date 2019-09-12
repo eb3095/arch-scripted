@@ -119,7 +119,16 @@ curl -O https://blackarch.org/strap.sh
 chmod +x ./strap.sh
 ./strap.sh
 pacman -Syyu --noconfirm
-pacman -S blackarch --noconfirm
+
+# Install Blackarch packages
+while true; do
+    read -p "Install all blackarch Packages? (y/n) " yn
+    case $yn in
+        [Yy]* ) pacman -S blackarch --noconfirm; break;;
+        [Nn]* ) break;;
+        * ) echo "Please answer yes or no.";;
+    esac
+done
 
 # Remove Garbage
 runuser -l installer -c 'trizen --remove --noconfirm kwrite konsole konqueror kate kmail'
