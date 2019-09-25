@@ -60,6 +60,12 @@ read -s userpw
 
 # Setup user
 mkdir /home/$user
+mkdir /home/$user/bin
+cp /etc/skel/.bash* /home/$user/
+echo 'if [[ $UID -ge 1000 && -d $HOME/bin && -z $(echo $PATH | grep -o $HOME/bin) ]]' >> /home/$user/.bashrc
+echo 'then' >> /home/$user/.bashrc
+echo '    export PATH="${PATH}:$HOME/bin"' >> /home/$user/.bashrc
+echo 'fi' >> /home/$user/.bashrc
 useradd -d /home/$user $user
 echo $user:"$userpw" | chpasswd
 chown -R $user:$user /home/$user
