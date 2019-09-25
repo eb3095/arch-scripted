@@ -60,6 +60,12 @@ read -s userpw
 
 # Setup user
 mkdir /home/$user
+mkdir /home/$user/bin
+cp /etc/skel/.bash* /home/$user/
+echo 'if [[ $UID -ge 1000 && -d $HOME/bin && -z $(echo $PATH | grep -o $HOME/bin) ]]' >> /home/$user/.bashrc
+echo 'then' >> /home/$user/.bashrc
+echo '    export PATH="${PATH}:$HOME/bin"' >> /home/$user/.bashrc
+echo 'fi' >> /home/$user/.bashrc
 useradd -d /home/$user $user
 echo $user:"$userpw" | chpasswd
 chown -R $user:$user /home/$user
@@ -93,6 +99,14 @@ popd
 chmod -R 777 /tmp/trizen
 runuser -l installer -c 'cd /tmp/trizen;makepkg -si --noconfirm'
 rm -rf /tmp/trizen
+
+# Enable Multilib
+echo "[multilib]" >> /etc/pacman.conf
+echo "Include = /etc/pacman.d/mirrorlist" >> /etc/pacman.conf
+
+# Enable Multilib Testing
+echo "[multilib-testing]" >> /etc/pacman.conf
+echo "Include = /etc/pacman.d/mirrorlist" >> /etc/pacman.conf
 
 # Setup Packages
 PACKAGES='/root/packages.txt'
