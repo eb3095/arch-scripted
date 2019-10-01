@@ -69,6 +69,8 @@ chmod +x /mnt/root/desktop-chroot-installer.sh
 wget https://raw.githubusercontent.com/eb3095/arch-scripted/master/desktop/packages.txt -O /mnt/root/packages.txt
 wget https://raw.githubusercontent.com/eb3095/arch-scripted/master/desktop/dev-packages.txt -O /mnt/root/dev-packages.txt
 wget https://raw.githubusercontent.com/eb3095/arch-scripted/master/desktop/virt-packages.txt -O /mnt/root/virt-packages.txt
+wget https://raw.githubusercontent.com/eb3095/arch-scripted/master/desktop/nvidia.txt -O /mnt/root/nvidia.txt
+wget https://raw.githubusercontent.com/eb3095/arch-scripted/master/desktop/amdgpu.txt -O /mnt/root/amdgpu.txt
 
 # Create bootstrap
 echo '#!/bin/bash' >> /mnt/root/bootstrap.sh
