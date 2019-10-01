@@ -190,8 +190,8 @@ done
 while true; do
     read -p "Install Wine Packages? (y/staging/n) " yn
     case $yn in
-        [Yy]* ) runuser -l installer -c "trizen -Sy --noconfirm wine dxvk-bin"; break;;
-        [staging]* ) runuser -l installer -c "trizen -Sy --noconfirm wine-staging dxvk-bin"; break;;
+        [Yy]* ) runuser -l installer -c "trizen -Sy --noconfirm wine dxvk-bin lutris"; break;;
+        [staging]* ) runuser -l installer -c "trizen -Sy --noconfirm wine-staging dxvk-bin lutris"; break;;
         [Nn]* ) break;;
         * ) echo "Please answer yes or no.";;
     esac
