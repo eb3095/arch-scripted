@@ -1,1 +1,1 @@
-ebtables ovmf qemu libvirtd docker lxc lxd-git lxdui
+ebtables ovmf qemu libvirt docker lxc lxd-git lxdui virt-manager
