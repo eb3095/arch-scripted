@@ -112,6 +112,8 @@ echo "Include = /etc/pacman.d/mirrorlist" >> /etc/pacman.conf
 PACKAGES='/root/packages.txt'
 DEV='/root/dev-packages.txt'
 VIRT='/root/virt-packages.txt'
+AMDGPU='/root/amdgpu.txt'
+NVIDIA='/root/nvidia.txt'
 
 # Install packages
 while true; do
@@ -165,6 +167,36 @@ while true; do
     esac
 done
 
+NVIDIAPACK=`cat ${NVIDIA}`
+while true; do
+    read -p "Install Nvidia Packages? (y/n) " yn
+    case $yn in
+        [Yy]* ) runuser -l installer -c "trizen -Sy --noconfirm ${NVIDIAPACK}"; break;;
+        [Nn]* ) break;;
+        * ) echo "Please answer yes or no.";;
+    esac
+done
+
+AMDGPUPACK=`cat ${AMDGPU}`
+while true; do
+    read -p "Install AMDGPU Packages? (y/n) " yn
+    case $yn in
+        [Yy]* ) runuser -l installer -c "trizen -Sy --noconfirm ${AMDGPUPACK}"; break;;
+        [Nn]* ) break;;
+        * ) echo "Please answer yes or no.";;
+    esac
+done
+
+while true; do
+    read -p "Install Wine Packages? (y/staging/n) " yn
+    case $yn in
+        [Yy]* ) runuser -l installer -c "trizen -Sy --noconfirm wine dxvk-bin"; break;;
+        [staging]* ) runuser -l installer -c "trizen -Sy --noconfirm wine-staging dxvk-bin"; break;;
+        [Nn]* ) break;;
+        * ) echo "Please answer yes or no.";;
+    esac
+done
+
 # Remove Garbage
 runuser -l installer -c 'trizen --remove --noconfirm kwrite konsole konqueror kate kmail'
 
@@ -194,3 +226,5 @@ rm /root/bootstrap.sh
 rm /root/packages.txt
 rm /root/dev-packages.txt
 rm /root/virt-packages.txt
+rm /root/amdgpu.txt
+rm /root/nvidia.txt
