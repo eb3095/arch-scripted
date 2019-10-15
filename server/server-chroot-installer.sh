@@ -148,7 +148,7 @@ systemctl enable ufw
 systemctl enable sshd
 systemctl enable NetworkManager
 systemctl disable dhcpcd
-
+timedatectl set-ntp true
 
 # Configure Firewall
 ufw enable
