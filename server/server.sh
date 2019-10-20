@@ -56,7 +56,7 @@ else
 fi
 
 # Install base
-pacstrap /mnt base
+pacstrap /mnt base linux linux-firmware
 
 # Generate fstab
 genfstab -U /mnt >> /mnt/etc/fstab
