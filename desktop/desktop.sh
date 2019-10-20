@@ -34,9 +34,9 @@ if [ "$EFI" = true ] ; then
   mkfs.fat -F32 "$drive"1
 else
   parted --script $drive mklabel msdos
-  parted --script $drive set 1 boot on
   parted --script $drive mkpart primary linux-swap 1MiB 8GiB
   parted --script $drive mkpart primary ext4 8GiB 100%
+  parted --script $drive set 1 boot on
   mkfs.ext4 -F "$drive"1
 fi
 
