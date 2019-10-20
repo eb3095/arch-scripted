@@ -41,7 +41,7 @@ echo "127.0.1.1      arch.localdomain arch" >> /etc/hosts
 mkinitcpio -p linux
 
 # Install ABSOLUTE essentials
-pacman -Sy wget git unzip zip base-devel grub zsh efibootmgr dosfstools os-prober mtools sudo --noconfirm
+pacman -Sy wget git unzip zip base-devel grub zsh efibootmgr dosfstools os-prober mtools sudo nano --noconfirm
 
 echo
 echo "Enter a root password [ENTER]:"
