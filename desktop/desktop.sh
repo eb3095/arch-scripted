@@ -36,7 +36,7 @@ else
   parted --script $drive mklabel msdos
   parted --script $drive mkpart primary linux-swap 1MiB 8GiB
   parted --script $drive mkpart primary ext4 8GiB 100%
-  parted --script $drive set 1 boot on
+  parted --script $drive set 2 boot on
   mkfs.ext4 -F "$drive"1
 fi
 
